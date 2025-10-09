@@ -8,7 +8,7 @@ Alumnos
 
 -Pablo Mansilla
 
--Dana Florencia Ramirez Cocomarola
+-Dana Florencia Ramirez Cocomarola      DNI: 41612951
 
 
 # Introduccion al caso de estudio.
