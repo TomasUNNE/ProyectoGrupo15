@@ -6,7 +6,7 @@ Alumnos
 
 -Arduino De Michielis Ana Fiorella      DNI: 44572923
 
--Pablo Mansilla
+-Pablo Mansilla                         DNI: 32837117
 
 -Dana Florencia Ramirez Cocomarola      DNI: 41612951
 
