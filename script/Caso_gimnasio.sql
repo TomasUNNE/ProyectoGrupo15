@@ -21,25 +21,33 @@ CREATE TABLE Estado
 
 CREATE TABLE telefono
 (
-  id_telefono INT NOT NULL,
+  id_telefono INT IDENTITY(1,1) NOT NULL,
   numero INT NOT NULL,
   CONSTRAINT PK_telefono PRIMARY KEY (id_telefono)
+);
+
+CREATE TABLE Persona
+(
+  id_persona INT IDENTITY(1,1) NOT NULL,
+  nombre VARCHAR(100) NOT NULL,
+  apellido VARCHAR(100) NOT NULL,
+  correo VARCHAR(200) NOT NULL,
+  dni INT NOT NULL,
+  id_telefono INT NOT NULL,
+  id_estado INT NOT NULL,
+  CONSTRAINT PK_Persona PRIMARY KEY (id_persona),
+  CONSTRAINT FK_telefono FOREIGN KEY (id_telefono) REFERENCES telefono(id_telefono),
+  CONSTRAINT FK_Estado FOREIGN KEY (id_estado) REFERENCES Estado(id_estado)
 );
 
 CREATE TABLE Personal
 (
   id_usuario INT NOT NULL,
-  nombre VARCHAR(100) NOT NULL,
-  apellido VARCHAR(100) NOT NULL,
-  correo VARCHAR(200) NOT NULL,
-  dni INT NOT NULL,
   id_rol INT NOT NULL,
-  id_estado INT NOT NULL,
-  id_telefono INT NOT NULL,
+  id_persona INT NOT NULL,
   CONSTRAINT PK_Usuario PRIMARY KEY (id_usuario),
   CONSTRAINT FK_rol FOREIGN KEY (id_rol) REFERENCES Rol(id_rol),
-  CONSTRAINT FK_estado_personal FOREIGN KEY (id_estado) REFERENCES Estado(id_estado),
-  CONSTRAINT FK_telefono_personal FOREIGN KEY (id_telefono) REFERENCES telefono(id_telefono)
+  CONSTRAINT FK_Persona_Personal FOREIGN KEY (id_persona) REFERENCES Persona(id_persona)
 );
 
 CREATE TABLE Membresia
@@ -52,20 +60,14 @@ CREATE TABLE Membresia
 
 CREATE TABLE Alumno
 (
-  id_alumno INT NOT NULL,
-  nombre VARCHAR(100) NOT NULL,
-  apellido VARCHAR(100) NOT NULL,
-  dni INT NOT NULL,
-  correo VARCHAR(100) NOT NULL,
+  id_alumno INT IDENTITY(1,1) NOT NULL,
   fecha_nacimiento DATE NOT NULL,
   sexo CHAR(1) NOT NULL,
-  id_estado INT NOT NULL,
   id_membresia INT NOT NULL,
-  id_telefono INT NOT NULL,
-  CONSTRAINT PK_alumno PRIMARY KEY (id_alumno),
-  CONSTRAINT FK_estado_alumno FOREIGN KEY (id_estado) REFERENCES Estado(id_estado),
+  id_persona INT NOT NULL,
+  CONSTRAINT PK_Alumno PRIMARY KEY (id_alumno),
   CONSTRAINT FK_membresia FOREIGN KEY (id_membresia) REFERENCES Membresia(id_membresia),
-  CONSTRAINT FK_telefono_alumno FOREIGN KEY (id_telefono) REFERENCES telefono(id_telefono)
+  CONSTRAINT FK_persona_alumno FOREIGN KEY (id_persona) REFERENCES Persona(id_persona)
 );
 
 
@@ -135,3 +137,4 @@ CREATE TABLE Alumno_Plan
   CONSTRAINT FK_plan_al FOREIGN KEY (id_plan) REFERENCES Plan_(id_plan),
   CONSTRAINT FK_alumno FOREIGN KEY (id_alumno) REFERENCES Alumno(id_alumno)
 );
+
