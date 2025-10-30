@@ -73,7 +73,7 @@ CREATE TABLE Pago
   id_metodo_pago INT NOT NULL,
   id_alumno INT NOT NULL,
   CONSTRAINT PK_Pago PRIMARY KEY (id_pago),
-  CONSTRAINT FK_metodo_pago FOREIGN KEY (id_metodo_pago) REFERENCES Metodo_pago(id_metodo_pago),
+  CONSTRAINT FK_metodo_pago FOREIGN KEY (id_metodo_pago) REFERENCES Metodo_pago(id_metodo_pago)
 );
 
 
@@ -138,5 +138,6 @@ CREATE TABLE Alumno_Plan
   CONSTRAINT FK_plan_al FOREIGN KEY (id_plan) REFERENCES Plan_(id_plan),
   CONSTRAINT FK_alumno FOREIGN KEY (id_alumno) REFERENCES Alumno(id_alumno)
 );
+
 
 
