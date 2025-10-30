@@ -58,6 +58,25 @@ CREATE TABLE Membresia
   CONSTRAINT PK_membresia PRIMARY KEY (id_membresia)
 );
 
+CREATE TABLE Metodo_pago
+(
+  id_metodo_pago INT NOT NULL,
+  nombre VARCHAR(100) NOT NULL,
+  CONSTRAINT PK_metodo_pago PRIMARY KEY (id_metodo_pago)
+);
+
+CREATE TABLE Pago
+(
+  fecha_pago DATE NOT NULL,
+  monto_total FLOAT NOT NULL,
+  id_pago INT NOT NULL,
+  id_metodo_pago INT NOT NULL,
+  id_alumno INT NOT NULL,
+  CONSTRAINT PK_Pago PRIMARY KEY (id_pago),
+  CONSTRAINT FK_metodo_pago FOREIGN KEY (id_metodo_pago) REFERENCES Metodo_pago(id_metodo_pago),
+);
+
+
 CREATE TABLE Alumno
 (
   id_alumno INT IDENTITY(1,1) NOT NULL,
@@ -67,7 +86,8 @@ CREATE TABLE Alumno
   id_persona INT NOT NULL,
   CONSTRAINT PK_Alumno PRIMARY KEY (id_alumno),
   CONSTRAINT FK_membresia FOREIGN KEY (id_membresia) REFERENCES Membresia(id_membresia),
-  CONSTRAINT FK_persona_alumno FOREIGN KEY (id_persona) REFERENCES Persona(id_persona)
+  CONSTRAINT FK_persona_alumno FOREIGN KEY (id_persona) REFERENCES Persona(id_persona),
+  CONSTRAINT FK_Pago FOREIGN KEY (id_pago) REFERENCES Pago(id_pago)
 );
 
 
@@ -109,25 +129,6 @@ CREATE TABLE Plan_Ejercicio
   CONSTRAINT FK_Plan_ej FOREIGN KEY (id_plan) REFERENCES Plan_(id_plan)
 );
 
-CREATE TABLE Metodo_pago
-(
-  id_metodo_pago INT NOT NULL,
-  nombre VARCHAR(100) NOT NULL,
-  CONSTRAINT PK_metodo_pago PRIMARY KEY (id_metodo_pago)
-);
-
-CREATE TABLE Pago
-(
-  fecha_pago DATE NOT NULL,
-  monto_total FLOAT NOT NULL,
-  id_pago INT NOT NULL,
-  id_metodo_pago INT NOT NULL,
-  id_alumno INT NOT NULL,
-  CONSTRAINT PK_Pago PRIMARY KEY (id_pago),
-  CONSTRAINT FK_metodo_pago FOREIGN KEY (id_metodo_pago) REFERENCES Metodo_pago(id_metodo_pago),
-  CONSTRAINT FK_alumno_pago FOREIGN KEY (id_alumno) REFERENCES Alumno(id_alumno)
-);
-
 CREATE TABLE Alumno_Plan
 (
   fecha_asignacion INT NOT NULL,
@@ -137,4 +138,5 @@ CREATE TABLE Alumno_Plan
   CONSTRAINT FK_plan_al FOREIGN KEY (id_plan) REFERENCES Plan_(id_plan),
   CONSTRAINT FK_alumno FOREIGN KEY (id_alumno) REFERENCES Alumno(id_alumno)
 );
+
 
