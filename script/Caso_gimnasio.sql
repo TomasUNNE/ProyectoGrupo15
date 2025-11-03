@@ -37,7 +37,9 @@ CREATE TABLE Persona
   id_estado INT NOT NULL,
   CONSTRAINT PK_Persona PRIMARY KEY (id_persona),
   CONSTRAINT FK_telefono FOREIGN KEY (id_telefono) REFERENCES telefono(id_telefono),
-  CONSTRAINT FK_Estado FOREIGN KEY (id_estado) REFERENCES Estado(id_estado)
+  CONSTRAINT FK_Estado FOREIGN KEY (id_estado) REFERENCES Estado(id_estado),
+  CONSTRAINT UQ_Correo UNIQUE (correo),
+  CONSTRAINT UQ_DNI UNIQUE (dni)
 );
 
 CREATE TABLE Personal
@@ -71,7 +73,6 @@ CREATE TABLE Pago
   monto_total FLOAT NOT NULL,
   id_pago INT NOT NULL,
   id_metodo_pago INT NOT NULL,
-  id_alumno INT NOT NULL,
   CONSTRAINT PK_Pago PRIMARY KEY (id_pago),
   CONSTRAINT FK_metodo_pago FOREIGN KEY (id_metodo_pago) REFERENCES Metodo_pago(id_metodo_pago)
 );
@@ -87,7 +88,8 @@ CREATE TABLE Alumno
   CONSTRAINT PK_Alumno PRIMARY KEY (id_alumno),
   CONSTRAINT FK_membresia FOREIGN KEY (id_membresia) REFERENCES Membresia(id_membresia),
   CONSTRAINT FK_persona_alumno FOREIGN KEY (id_persona) REFERENCES Persona(id_persona),
-  CONSTRAINT FK_Pago FOREIGN KEY (id_pago) REFERENCES Pago(id_pago)
+  CONSTRAINT FK_Pago FOREIGN KEY (id_pago) REFERENCES Pago(id_pago),
+  CONSTRAINT FK_Fecha_nac UNIQUE (fecha_nacimiento)
 );
 
 
@@ -138,6 +140,7 @@ CREATE TABLE Alumno_Plan
   CONSTRAINT FK_plan_al FOREIGN KEY (id_plan) REFERENCES Plan_(id_plan),
   CONSTRAINT FK_alumno FOREIGN KEY (id_alumno) REFERENCES Alumno(id_alumno)
 );
+
 
 
 
