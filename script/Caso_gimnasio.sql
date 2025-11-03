@@ -89,8 +89,7 @@ CREATE TABLE Alumno
   CONSTRAINT PK_Alumno PRIMARY KEY (id_alumno),
   CONSTRAINT FK_membresia FOREIGN KEY (id_membresia) REFERENCES Membresia(id_membresia),
   CONSTRAINT FK_persona_alumno FOREIGN KEY (id_persona) REFERENCES Persona(id_persona),
-  CONSTRAINT FK_Pago FOREIGN KEY (id_pago) REFERENCES Pago(id_pago),
-  CONSTRAINT FK_Fecha_nac UNIQUE (fecha_nacimiento)
+  CONSTRAINT FK_Pago FOREIGN KEY (id_pago) REFERENCES Pago(id_pago)
 );
 
 
@@ -141,6 +140,7 @@ CREATE TABLE Alumno_Plan
   CONSTRAINT FK_plan_al FOREIGN KEY (id_plan) REFERENCES Plan_(id_plan),
   CONSTRAINT FK_alumno FOREIGN KEY (id_alumno) REFERENCES Alumno(id_alumno)
 );
+
 
 
 
