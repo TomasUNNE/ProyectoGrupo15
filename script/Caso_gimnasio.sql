@@ -22,7 +22,7 @@ CREATE TABLE Estado
 CREATE TABLE telefono
 (
   id_telefono INT IDENTITY(1,1) NOT NULL,
-  numero INT NOT NULL,
+  numero VARCHAR(15) NOT NULL,
   CONSTRAINT PK_telefono PRIMARY KEY (id_telefono)
 );
 
@@ -85,6 +85,7 @@ CREATE TABLE Alumno
   sexo CHAR(1) NOT NULL,
   id_membresia INT NOT NULL,
   id_persona INT NOT NULL,
+  id_pago INT NOT NULL,
   CONSTRAINT PK_Alumno PRIMARY KEY (id_alumno),
   CONSTRAINT FK_membresia FOREIGN KEY (id_membresia) REFERENCES Membresia(id_membresia),
   CONSTRAINT FK_persona_alumno FOREIGN KEY (id_persona) REFERENCES Persona(id_persona),
@@ -140,6 +141,7 @@ CREATE TABLE Alumno_Plan
   CONSTRAINT FK_plan_al FOREIGN KEY (id_plan) REFERENCES Plan_(id_plan),
   CONSTRAINT FK_alumno FOREIGN KEY (id_alumno) REFERENCES Alumno(id_alumno)
 );
+
 
 
 
