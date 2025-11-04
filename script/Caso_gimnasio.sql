@@ -133,7 +133,7 @@ CREATE TABLE Plan_Ejercicio
 
 CREATE TABLE Alumno_Plan
 (
-  fecha_asignacion INT NOT NULL,
+  fecha_asignacion DATE NOT NULL,
   id_plan INT NOT NULL,
   id_alumno INT NOT NULL,
   CONSTRAINT PK_plan_alumno PRIMARY KEY (id_plan, id_alumno),
