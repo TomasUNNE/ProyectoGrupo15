@@ -2,7 +2,7 @@
 
 
 
-SQLSERVER considera a los índices como estructuras de datos en disco utilizadas con el fin de reducir el tiempo y mejorar la eficiencia de las consultas realizadas a una tabla determinada. Estos índices contienen copias de los datos de la tabla, organizados con una estructura B-árbol que permite a SQLSERVER encontrar las filas asociadas a los valores de clave rápida y eficientemente. Al ejecutar una consulta, el optimizador de consultas se encarga de evaluar cada método disponible para recuperar los datos. Luego, selecciona el más eficiente.
+SQLSERVER considera a los índices como estructuras de datos en disco utilizadas con el fin de reducir el tiempo y mejorar la eficiencia de las consultas realizadas a una tabla determinada. Estos índices contienen copias de los datos de la tabla, organizados con una estructura B-árbol que permite a SQLSERVER encontrar las filas asociadas a los valores de clave rápida y eficientemente. Al ejecutar una consulta, el optimizador de consultas se encarga de evaluar cada método disponible para recuperar los datos. Luego, selecciona al mas eficiente. Es decir, aquel que minimice el uso de recursos y tiempo.
 
 
 
@@ -12,9 +12,9 @@ Ahondando en la estructura de los índices, un B-árbol es una estructura auto-b
 
 Los nodos de un B-árbol se dividen en diferentes categorías o niveles:
 
-* Nodo raíz: nivel superior del árbol. Se considera como el punto de partida de la búsqueda.
-* Nodos intermedios: aquellos que contienen rangos de claves y punteros a los nodos de nivel inferior
-* Nodos hoja: en ellos se almacena la información real delas claves del índice.
+* Nodo raíz: nivel superior del árbol. Se considera como el punto de partida de cualquier búsqueda. Posee los rangos de claves y punteros a los nodos del siguiente nivel.
+* Nodos intermedios: aquellos que contienen rangos de claves y punteros a los nodos de nivel inmediatamente inferior.
+* Nodos hoja: en ellos se almacena la información real delas claves del índice. Estos nodos se encuentran enlazados secuencialmente, permitiendo exploraciones eficientes.
 
 
 
@@ -27,5 +27,10 @@ Los índices se pueden dividir en dos tipos principales.
 
 
 
-## 
+## Conclusiones sobre el tema
+
+Los índices se encargan de permitir que motor de la base de datos realice una búsqueda rápida y directa de datos. 
+El optimizador de consultas tiene un rol central al utilizar los índices. Selecciona el plan de ejecución más eficiente basándose en los índices disponibles, garantizando el menor costo posible de recursos y tiempo de respuesta por consulta.
+Si bien los índices mejoran considerablemente las operaciones de lectura, también añaden una sobrecarga al sistema durante las operaciones de escritura. Esto se debe a que el motor debe mantener y actualizar las estructuras del índice.
+Considerando todo lo anteriormente mencionado, se puede concluir en que es indispensable utilizar una buena estrategia de indexación si se espera mantener un alto rendimiento y una experiencia de usuario óptima. 
 
