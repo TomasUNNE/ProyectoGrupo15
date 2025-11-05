@@ -61,18 +61,18 @@ ORDER BY correo ASC;
 SET STATISTICS TIME OFF;
 SET STATISTICS IO OFF;
 
---Table 'Persona_Sin_Indice'. Scan count 1, logical reads 61011, physical reads 0, page server reads 0, 
+--Table 'Persona_Sin_Indice'. Scan count 1, logical reads 47442, physical reads 0, page server reads 0, 
 --read-ahead reads 0, page server read-ahead reads 0, lob logical reads 0, lob physical reads 0, 
 --lob page server reads 0, lob read-ahead reads 0, lob page server read-ahead reads 0.
 
 -- SQL Server Execution Times:
---   CPU time = 3782 ms,  elapsed time = 7070 ms.
+--   CPU time = 3844 ms,  elapsed time = 7865 ms.
 
---7.07 segundos en total para completarse indica un tiempo de respuesta lento.
+--7.8 segundos en total para completarse indica un tiempo de respuesta lento.
 
 --El principal cuello de botella fue el I/O lógico con 61.011 lecturas. Requirió procesar mucha información innecesaria para encontrar el conjunto de datos buscado.
 
---La optimización en la tabla Persona_Con_Indice debería reducir las 61.011 lecturas lógicas significativamente,
+--La optimización en la tabla Persona_Con_Indice debería reducir las 47442 lecturas lógicas significativamente,
 -- reduciendo también el tiempo de CPU y el tiempo transcurrido drásticamente.
 
 
@@ -99,9 +99,9 @@ SET STATISTICS IO OFF;
 --lob page server read-ahead reads 0.
 
 -- SQL Server Execution Times:
---   CPU time = 1703 ms,  elapsed time = 1808 ms.
+--   CPU time = 1719 ms,  elapsed time = 1791 ms.
 
--- Aunque se buscaba solo un correo, el sistema tuvo que leer 61,011 toda la tabla hasta encontrar o confirmar que el registro estaba ausente.
+-- Aunque se buscaba solo un correo, el sistema tuvo que leer toda la tabla (47442 lecturas lógicas) hasta encontrar o confirmar que el registro estaba ausente.
 --Esto se debe a que la columna correo no es la clave primaria y no tiene un índice que dirija la búsqueda.
 --Tiempo transcurrido relativamente alto, causado por las miles de lecturas lógicas que el servidor tuvo que procesar.
 
