@@ -1,20 +1,22 @@
 /*	PROYECTO DE ESTUDIO - CASO GIMNASIO
+
 	Tema: Optimización de consultas a través de índices en la tabla PERSONA. Por indicaciones del docente se han eliminado las claves 
 	foraneas presentes en la tabla PERSONA original
+
 */
 
 -- Usamos la base de datos del proyecto
 USE Caso_gimnasio; 
 go
 ----------------------------------------------------------------------
--- 0) Limpieza y Preparación
+--Limpieza y PreparaciÃ³n
 ----------------------------------------------------------------------
 
 -- Limpiar tablas si existen (para el estudio comparativo)
 IF OBJECT_ID('Persona_Sin_Indice') IS NOT NULL DROP TABLE Persona_Sin_Indice;
 IF OBJECT_ID('Persona_Con_Indice') IS NOT NULL DROP TABLE Persona_Con_Indice;
 
--- Creacion de tabla PERSONA (Persona_Sin_Indice) -> Tabla sin índice en el campo de busqueda 'correo'
+-- Creacion de tabla PERSONA (Persona_Sin_Indice) -Tabla sin Ã­ndice en el campo de busqueda 'correo'
 CREATE TABLE Persona_Sin_Indice
 (
     id_persona INT IDENTITY(1,1) NOT NULL,
@@ -102,3 +104,4 @@ SET STATISTICS IO OFF;
 -- Aunque se buscaba solo un correo, el sistema tuvo que leer 61,011 toda la tabla hasta encontrar o confirmar que el registro estaba ausente.
 --Esto se debe a que la columna correo no es la clave primaria y no tiene un índice que dirija la búsqueda.
 --Tiempo transcurrido relativamente alto, causado por las miles de lecturas lógicas que el servidor tuvo que procesar.
+
