@@ -16,7 +16,25 @@ Es un objeto que se crea con la sentencia CREATE FUNCTION y se invoca con la sen
 
 # Diferencias entre Procedimientos y Funciones Almacenadas (MySQL vs. Otros Motores)
 La principal distinción entre los procedimientos almacenados (Stored Procedures - SPs) y las funciones almacenadas (Stored Functions - SFs) radica en su propósito y en cómo manejan los datos de entrada y salida.
-# CUADRO
+## En MySQL (CREATE PROCEDURE vs. CREATE FUNCTION)
+_______________________________________________________________________________________________________
+|Característica             | Procedimiento Almacenado (PROCEDURE)   |Función Almacenada (FUNCTION)   |
+|______________________________________________________________________________________________________                        |Creación e Invocación      | Se crea con CREATE PROCEDURE           |Se crea con CREATE FUNCTION     | 
+|                           | y se invoca con la sentencia CALL      |y se invoca con la sentencia    |
+|                           |                                        |SELECT o dentro de una expresión|
+|______________________________________________________________________________________________________
+|Valor de Retorno           | Puede devolver varios valores          | Siempre devuelve un único      |   
+|                           |en forma de parámetros de salida        |valor, asociado al nombre de la |
+|                           |(OUT/INOUT)                             |función, y requiere la          |
+|                           |                                        |cláusula RETURNS.               |
+|___________________________|________________________________________|________________________________|
+|Tipos de Parámetros        | Acepta parámetros de entrada (IN),     | Todos los parámetros son de    |
+|                           |salida (OUT), y entrada/salida (INOUT). | entrada (IN). No es válido     |
+|                           |                                        | especificar OUT o INOUT        |
+|___________________________|________________________________________|________________________________|
+|
+
+
 # Respecto a Otros Motores (ej. SQL Server)
 En motores como SQL Server o Azure SQL Database, un procedimiento almacenado es un grupo de instrucciones Transact-SQL o una referencia a un método CLR.
 Mientras que las diferencias conceptuales (procedimientos para acciones con efectos secundarios y funciones para cálculos que devuelven un valor) se mantienen, las diferencias prácticas residen en la sintaxis, el lenguaje de programación (T-SQL o CLR en SQL Server vs. SQL/Control Structures en MySQL), y las características específicas de manejo de tipos y errores:
