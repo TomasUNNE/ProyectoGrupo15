@@ -7,6 +7,9 @@ Los procedimientos pueden realizar las siguientes operaciones lo que los asemeja
 * Aceptar parámetros de entrada y devolver varios valores en forma de parámetros de salida al programa que realiza la llamada.
 * Contener instrucciones de programación que realicen operaciones en la base de datos. Entre otras, pueden contener llamadas a otros procedimientos.
 * Devolver un valor de estado a un programa que realiza una llamada para indicar si la operación se ha realizado correctamente o se han producido errores, y el motivo de estos.
+## Ventajas de Usar Los Procedimientos
+La utilizacion y buena aplicacion de los procedimientos en una base de datos SQL trae grandes ventajas como:
+
 
 # Función almacenada: 
 Es un objeto que se crea con la sentencia CREATE FUNCTION y se invoca con la sentencia SELECT o dentro de una expresión. Una función puede tener cero o muchos parámetros de entrada y siempre devuelve un valor, asociado al nombre de la función.
