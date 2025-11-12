@@ -24,6 +24,7 @@ La principal distinción entre los procedimientos almacenados (Stored Procedures
 | **Invocación** | Se invoca con la sentencia `CALL` | Se invoca con la sentencia `SELECT` o dentro de una expresión |
 | **Valor de Retorno** | Puede devolver varios valores en forma de parámetros de salida (`OUT`/`INOUT`) | Siempre devuelve un único valor, asociado al nombre de la función, y requiere la cláusula `RETURNS` |
 | **Tipos de Parámetros** | Acepta parámetros de entrada (`IN`), salida (`OUT`), y entrada/salida (`INOUT`) | Todos los parámetros son de entrada (`IN`). No es válido especificar `OUT` o `INOUT` |
+| **Resultados (Conjunto de Filas)** | Puede contener sentencias SELECT que devuelvan un conjunto de resultados (result set) | No puede devolver un conjunto de resultados. Si un SELECT no tiene una cláusula INTO, se producirá un error. |
 
 
 # Respecto a Otros Motores (ej. SQL Server)
