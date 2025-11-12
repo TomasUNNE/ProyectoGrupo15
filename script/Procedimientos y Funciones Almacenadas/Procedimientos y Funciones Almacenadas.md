@@ -17,16 +17,14 @@ Es un objeto que se crea con la sentencia CREATE FUNCTION y se invoca con la sen
 # Diferencias entre Procedimientos y Funciones Almacenadas (MySQL vs. Otros Motores)
 La principal distinción entre los procedimientos almacenados (Stored Procedures - SPs) y las funciones almacenadas (Stored Functions - SFs) radica en su propósito y en cómo manejan los datos de entrada y salida.
 ## En MySQL (CREATE PROCEDURE vs. CREATE FUNCTION)
-## En MySQL (CREATE PROCEDURE vs. CREATE FUNCTION)
-
 | Característica | Procedimiento Almacenado (PROCEDURE) | Función Almacenada (FUNCTION) |
 |---|---|---|
-| **Invocación** | Se invoca con la sentencia `CALL` | Se invoca con la sentencia `SELECT` o dentro de una expresión |
-| **Valor de Retorno** | Puede devolver varios valores en forma de parámetros de salida (`OUT`/`INOUT`) | Siempre devuelve un único valor, asociado al nombre de la función, y requiere la cláusula `RETURNS` |
-| **Tipos de Parámetros** | Acepta parámetros de entrada (`IN`), salida (`OUT`), y entrada/salida (`INOUT`) | Todos los parámetros son de entrada (`IN`). No es válido especificar `OUT` o `INOUT` |
+| **Invocación** | Se invoca con la sentencia CALL | Se invoca con la sentencia SELECT o dentro de una expresión |
+| **Valor de Retorno** | Puede devolver varios valores en forma de parámetros de salida (OUT/INOUT) | Siempre devuelve un único valor, asociado al nombre de la función, y requiere la cláusula RETURNS |
+| **Tipos de Parámetros** | Acepta parámetros de entrada (IN), salida (OUT), y entrada/salida (INOUT) | Todos los parámetros son de entrada (IN). No es válido especificar OUT o INOUT|
 | **Resultados (Conjunto de Filas)** | Puede contener sentencias SELECT que devuelvan un conjunto de resultados (result set) | No puede devolver un conjunto de resultados. Si un SELECT no tiene una cláusula INTO, se producirá un error. |
-
-
+| **Transacciones** | Puede contener sentencias de transacción SQL explícitas o implícitas, como COMMIT o ROLLBACK | No puede contener sentencias que realicen commit o rollback explícito o implícito. |
+| **Manipulación de Datos**| Típicamente utilizada para modificar datos (Modifies SQL Data) | Para poder crearse, debe ser declarada como DETERMINISTIC, NO SQL, o READS SQL DATA (aunque MODIFIES SQL DATA también es una característica posible).|
 # Respecto a Otros Motores (ej. SQL Server)
 En motores como SQL Server o Azure SQL Database, un procedimiento almacenado es un grupo de instrucciones Transact-SQL o una referencia a un método CLR.
 Mientras que las diferencias conceptuales (procedimientos para acciones con efectos secundarios y funciones para cálculos que devuelven un valor) se mantienen, las diferencias prácticas residen en la sintaxis, el lenguaje de programación (T-SQL o CLR en SQL Server vs. SQL/Control Structures en MySQL), y las características específicas de manejo de tipos y errores:
