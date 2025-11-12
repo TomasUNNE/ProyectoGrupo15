@@ -9,11 +9,8 @@ Los procedimientos pueden realizar las siguientes operaciones lo que los asemeja
 * Devolver un valor de estado a un programa que realiza una llamada para indicar si la operación se ha realizado correctamente o se han producido errores, y el motivo de estos.
 ## Ventajas de Usar Los Procedimientos
 La utilizacion y buena aplicacion de los procedimientos en una base de datos SQL trae grandes ventajas como:
-
-
 # Función almacenada: 
 Es un objeto que se crea con la sentencia CREATE FUNCTION y se invoca con la sentencia SELECT o dentro de una expresión. Una función puede tener cero o muchos parámetros de entrada y siempre devuelve un valor, asociado al nombre de la función.
-
 # Diferencias entre Procedimientos y Funciones Almacenadas (MySQL vs. Otros Motores)
 La principal distinción entre los procedimientos almacenados (Stored Procedures - SPs) y las funciones almacenadas (Stored Functions - SFs) radica en su propósito y en cómo manejan los datos de entrada y salida.
 ## En MySQL (CREATE PROCEDURE vs. CREATE FUNCTION)
@@ -37,14 +34,14 @@ Mientras que las diferencias conceptuales (procedimientos para acciones con efec
 Para el esquema del Caso_gimnasio, la implementación de rutinas almacenadas puede potenciar el modelo mejorando la integridad de los datos y la eficiencia operativa.
 Casos de uso de Procedimientos Almacenados (SPs)
 Los SPs son ideales para orquestar procesos complejos que implican múltiples pasos, transacciones y modificaciones de datos (MODIFIES SQL DATA):
-1. 💡 Registro de Nuevo Alumno (Transacciones): Al registrar un nuevo Alumno, se requiere la inserción coordinada en varias tablas: telefono, Persona, Pago, y finalmente Alumno. Un SP encapsularía este proceso para garantizar que si falla un paso (ej. el pago), se haga un ROLLBACK de toda la operación, manteniendo la integridad.
-2. 💡 Asignación de Plan de Entrenamiento: Crear un SP para asociar un Plan_ existente a un Alumno (insertando en Alumno_Plan). Esto podría incluir lógica para verificar si el id_usuario del Personal tiene el Rol adecuado para crear planes.
-3. 💡 Manejo de Pagos Mensuales: Un SP podría gestionar la renovación de la Membresia, actualizando el estado del Alumno y registrando un nuevo Pago.
+1. Registro de Nuevo Alumno (Transacciones): Al registrar un nuevo Alumno, se requiere la inserción coordinada en varias tablas: telefono, Persona, Pago, y finalmente Alumno. Un SP encapsularía este proceso para garantizar que si falla un paso (ej. el pago), se haga un ROLLBACK de toda la operación, manteniendo la integridad.
+2. Asignación de Plan de Entrenamiento: Crear un SP para asociar un Plan_ existente a un Alumno (insertando en Alumno_Plan). Esto podría incluir lógica para verificar si el id_usuario del Personal tiene el Rol adecuado para crear planes.
+3. Manejo de Pagos Mensuales: Un SP podría gestionar la renovación de la Membresia, actualizando el estado del Alumno y registrando un nuevo Pago.
 Casos de uso de Funciones Almacenadas (SFs)
 Las SFs son perfectas para realizar cálculos reutilizables que se pueden integrar directamente en consultas SELECT o cláusulas WHERE (READS SQL DATA):
-1. 💡 Cálculo de Antigüedad del Alumno: Una función que tome la fecha_nacimiento del Alumno y devuelva la edad o el tiempo de membresía. Esto simplificaría las consultas de reportes.
-2. 💡 Obtención del Nombre Completo: Una función para construir el nombre completo (nombre, apellido) de la Persona.
-3. 💡 Verificación de Estado de Pago: Una función que revise la tabla Pago y devuelva el estado actual de la membresía de un alumno (Pagado, Pendiente) basado en fechas.
+1. Cálculo de Antigüedad del Alumno: Una función que tome la fecha_nacimiento del Alumno y devuelva la edad o el tiempo de membresía. Esto simplificaría las consultas de reportes.
+2. Obtención del Nombre Completo: Una función para construir el nombre completo (nombre, apellido) de la Persona.
+3. Verificación de Estado de Pago: Una función que revise la tabla Pago y devuelva el estado actual de la membresía de un alumno (Pagado, Pendiente) basado en fechas.
 Aporte para Sacarle el Mayor Provecho al Script
 El mayor provecho se obtiene al implementar estas rutinas para asegurar las ventajas clave del uso de SPs/SFs:
 • Reutilización del Código: Evita reescribir la lógica de negocio (ej. la secuencia de inserción de un alumno) en cada aplicación cliente, reduciendo inconsistencias.
@@ -67,7 +64,7 @@ Las fuentes no contienen información ni ejemplos sobre cómo procesar o inserta
 Para esta tarea específica, fuera del alcance de los procedimientos SQL estándar, generalmente se necesitaría una capa de aplicación externa (un script en Python, PHP, etc.) que interprete el dato no estructurado, lo valide y lo pase como parámetros de entrada (ya estructurados) a un procedimiento almacenado diseñado para la inserción.
 
 --------------------------------------------------------------------------------
-5. Potenciando el Script en la Seguridad 🔒
+5. Potenciando el Script en la Seguridad
 El uso de procedimientos almacenados es una de las maneras más efectivas de potenciar la seguridad de su script y su modelo de datos.
 Seguridad Reforzada mediante SPs
 1. Control de Permisos Granular: Puede permitir que varios usuarios o programas realicen operaciones sobre los objetos subyacentes (tablas como Persona, Pago, Personal) a través de un procedimiento, sin que esos usuarios o programas tengan permisos directos sobre los objetos. El procedimiento actúa como un guardián. Esto simplifica drásticamente los niveles de seguridad.
