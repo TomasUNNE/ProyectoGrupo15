@@ -1,14 +1,12 @@
 # PROCEDIMIENTOS Y FUNCIONES ALMACENADAS
 ## Resumen General del Tema:
-Al utilizar Procedimientos Almacenados Y Funciones dentro de la base de datos SQL Estos objetos permiten encapsular lógica de negocio, operaciones complejas y reaccionar automáticamente a eventos en las tablas, mejorando la eficiencia, seguridad y mantenibilidad.
+Al utilizar Procedimientos Almacenados Y Funciones dentro de la base de datos SQL, estos objetos permiten encapsular lógica de negocio (conjunto de reglas, políticas, y procesos que definen cómo opera y gestiona los datos una organizació), operaciones complejas y reaccionar automáticamente a eventos en las tablas, mejorando la eficiencia, seguridad y mantenibilidad.
 # Procedimiento almacenado: 
 Es un objeto que se crea con la sentencia CREATE PROCEDURE y se invoca con la sentencia CALL. Un procedimiento puede tener cero o muchos parámetros de entrada y cero o muchos parámetros de salida.Se pueden utilizar para validar datos, controlar el acceso o reducir el tráfico de red.
 Los procedimientos pueden realizar las siguientes operaciones lo que los asemejan a las construcciones de otros lenguajes de programación,:
 * Aceptar parámetros de entrada y devolver varios valores en forma de parámetros de salida al programa que realiza la llamada.
 * Contener instrucciones de programación que realicen operaciones en la base de datos. Entre otras, pueden contener llamadas a otros procedimientos.
 * Devolver un valor de estado a un programa que realiza una llamada para indicar si la operación se ha realizado correctamente o se han producido errores, y el motivo de estos.
-## Ventajas de Usar Los Procedimientos
-La utilizacion y buena aplicacion de los procedimientos en una base de datos SQL trae grandes ventajas como:
 # Función almacenada: 
 Es un objeto que se crea con la sentencia CREATE FUNCTION y se invoca con la sentencia SELECT o dentro de una expresión. Una función puede tener cero o muchos parámetros de entrada y siempre devuelve un valor, asociado al nombre de la función.
 # Diferencias entre Procedimientos y Funciones Almacenadas (MySQL vs. Otros Motores)
@@ -29,8 +27,29 @@ Mientras que las diferencias conceptuales (procedimientos para acciones con efec
 • Parámetros de Salida: Ambos permiten devolver valores a través de parámetros de salida.
 • Valor de Estado: Los procedimientos de SQL Server pueden devolver un valor de estado al programa que realiza la llamada para indicar éxito o errores. En MySQL, esto se gestiona típicamente mediante parámetros OUT o manejadores de errores.
 
---------------------------------------------------------------------------------
-2. Casos de Uso en el Script del Gimnasio y Maximización de Potencial (Potenciamiento del Modelo)
+## Ventajas de Usar Los Procedimientos
+La utilizacion y buena aplicacion de los procedimientos en una base de datos SQL trae grandes ventajas como:
+1. Seguridad Reforzada: Los procedimientos almacenados actúan como guardianes de los datos subyacentes, lo cual simplifica y fortalece los niveles de seguridad.
+• Protección de Objetos: Varios usuarios y programas cliente pueden realizar operaciones en los objetos de la base de datos subyacentes a través de un procedimiento, aunque no tengan permisos directos sobre esos objetos. El procedimiento controla qué actividades se llevan a cabo y protege las tablas.
+• Permisos Simplificados: Esto elimina la necesidad de conceder permisos en cada nivel de objetos. Por ejemplo, acciones como TRUNCATE TABLE no tienen permisos que se puedan conceder directamente al usuario, pero se pueden ampliar los permisos para truncar la tabla al usuario al que se conceda el permiso EXECUTE para el módulo que contiene la instrucción.
+• Prevención de Inyección SQL: El uso de parámetros en los procedimientos ayuda a protegerse contra ataques por inyección de código SQL. Dado que la entrada de parámetros se trata como un valor literal y no como código ejecutable, es más difícil para un atacante insertar comandos maliciosos en las instrucciones.
+• Ocultación de la Arquitectura: Cuando una aplicación llama a un procedimiento a través de la red, solo la llamada es visible. Esto evita que los usuarios malintencionados vean los nombres de los objetos, las tablas de la base de datos o busquen datos críticos.
+• Contexto de Seguridad: Se puede utilizar la cláusula EXECUTE AS (o SQL SECURITY en MySQL) para habilitar la suplantación de otro usuario o permitir que las aplicaciones realicen actividades sin necesidad de contar con permisos directos sobre los objetos subyacentes.
+2. Tráfico de Red Reducido 
+El código de un procedimiento se ejecuta en un único lote de código.
+• Esto reduce significativamente el tráfico de red entre el servidor y el cliente.
+• Únicamente se envía a través de la red la llamada para ejecutar el procedimiento, mientras que sin esta encapsulación, cada línea de código tendría que enviarse por separado.
+3. Rendimiento Mejorado 
+De forma predeterminada, un procedimiento se compila la primera vez que se ejecuta, y el plan de ejecución creado se reutiliza en posteriores ejecuciones.
+• Debido a que el procesador de consultas no tiene que crear un plan nuevo cada vez, normalmente necesita menos tiempo para procesar el procedimiento.
+4. Reutilización del Código (Reutilización del código) 
+Cualquier operación de base de datos redundante es un candidato perfecto para la encapsulación en un procedimiento.
+• Esto elimina la necesidad de escribir el mismo código varias veces, reduciendo las inconsistencias de código.
+• Permite que cualquier usuario o aplicación con los permisos necesarios pueda acceder y ejecutar el código centralizado.
+5. Mantenimiento Más Sencillo (Easier Maintenance) 
+Al llamar las aplicaciones cliente a procedimientos y mantener las operaciones de base de datos en la capa de datos, solo se deben actualizar los cambios de los procesos en la base de datos subyacente.
+• El nivel de aplicación permanece independiente y no necesita tener conocimiento sobre los cambios realizados en los diseños, las relaciones o los procesos internos de la base de datos.
+## Aplicacion de los temas en nuestro modelos de datos
 Para el esquema del Caso_gimnasio, la implementación de rutinas almacenadas puede potenciar el modelo mejorando la integridad de los datos y la eficiencia operativa.
 Casos de uso de Procedimientos Almacenados (SPs)
 Los SPs son ideales para orquestar procesos complejos que implican múltiples pasos, transacciones y modificaciones de datos (MODIFIES SQL DATA):
