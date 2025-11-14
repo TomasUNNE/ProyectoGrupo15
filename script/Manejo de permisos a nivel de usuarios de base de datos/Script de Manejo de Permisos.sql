@@ -17,7 +17,7 @@ GO
 CREATE USER manuel FOR LOGIN manuel;
 CREATE USER juan FOR LOGIN juan;
 
---- Se asignan distintos permisos a los usuarios creados para esta base de datos (caso_camiones)
+--- Se asignan distintos permisos a los usuarios creados para esta base de datos (caso_gimnasio)
 
 -- Por ejemplo, manuel solo puede leer las tablas, es decir esta restringido a usar solo la sentencia SELECT
 EXEC sp_addrolemember 'db_datareader', 'manuel';
@@ -50,4 +50,5 @@ REVERT --- Recuerda salir del usuario activo.
 
 -- Ahora tambien le otorgamos permisos de administrador a juan.
 EXEC sp_addrolemember 'db_ddladmin','juan';
+
 go
