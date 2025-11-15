@@ -119,3 +119,40 @@ PRINT @@TRANCOUNT;
 SELECT id_pago FROM Pago 
 ORDER BY id_pago DESC
 
+--Transacción Anidada con punto de guardado
+GO
+PRINT '--- USANDO SAVE TRANSACTION (PUNTOS DE GUARDADO) ---';
+BEGIN TRAN transaccion_principal; -- @@TRANCOUNT = 1
+PRINT 'BEGIN transaccion_principal. @@TRANCOUNT: ' + STR(@@TRANCOUNT);
+
+-- Operación 1: Insertar el primer pago
+INSERT INTO Pago (id_pago, fecha_pago, monto_total, id_metodo_pago) VALUES (10001, GETDATE(), 1000.0, 1);
+PRINT 'Pago (10001) insertado.';
+
+-- Creamos un punto de guardado
+SAVE TRANSACTION punto_de_guardado_1;
+PRINT 'SAVEPOINT creado (punto_de_guardado_1).';
+
+-- Operación 2: Intentar insertar un pago duplicado (forzar error)
+BEGIN TRY
+    PRINT 'Intentando insertar Pago (10001) de nuevo...';
+    INSERT INTO Pago (id_pago, fecha_pago, monto_total, id_metodo_pago) VALUES (10001, GETDATE(), 2000.0, 1);
+END TRY
+BEGIN CATCH
+    PRINT 'Error detectado: ' + ERROR_MESSAGE();
+    -- Revertimos SÓLO la Operación 2, volviendo al savepoint
+    ROLLBACK TRANSACTION punto_de_guardado_1;
+    PRINT 'ROLLBACK al SAVEPOINT ejecutado. La Operación 1 (Pago 10001) sigue en la transacción.';
+END CATCH;
+
+-- La transacción principal SIGUE ACTIVA (@@TRANCOUNT = 1)
+-- Confirmamos la transacción (esto guarda el Pago 10001)
+IF @@TRANCOUNT > 0
+BEGIN
+    COMMIT TRAN transaccion_principal;
+    PRINT 'COMMIT transaccion_principal ejecutado.';
+END
+GO
+
+-- Verificación: El pago 10001 SÍ debe existir.
+SELECT * FROM Pago WHERE id_pago = 10001;
