@@ -68,13 +68,16 @@ Al llamar las aplicaciones cliente a procedimientos y mantener las operaciones d
 Para nuestro modelo de base de datos Caso_gimnasio, la implementación de rutinas almacenadas puede ayudar al potenciamiento de la integridad de los datos y la eficiencia operativa.
 Los SPs al ser bloques de  procesos complejos simplifican los procesos de múltiples pasos, transacciones y modificaciones de datos.
 Casos de uso de Procedimientos Almacenados:
+
 **Manejo de Pagos Mensuales:** Un SP podría gestionar la renovación de la Membresia, actualizando el estado del Alumno y registrando un nuevo Pago.
 Ejemplo:Scrip_Renovacion_Membresia_SPs.sql
 
 Casos de uso de Funciones Almacenadas **(3)(SFs)**
 Las SFs son perfectas para realizar cálculos reutilizables que se pueden integrar directamente en consultas SELECT o cláusulas WHERE:
+
 **Consultas de Proximidad a Vencimientos** Uns SFs que devuelva una tabla con los datos de los alumnos y los dias faltantes para el vencimiento de su membresia.
 Ejemplo:Scrip_Dias_Prox_Vencer_SFs.sql
+
 **Otras Ventajas**
 
 **agregando Lógica Condicional dentro de un Procedimiento Almacenado:**
@@ -84,21 +87,27 @@ Esto permite que se puedan utilizar:
     ◦ Ejemplo de uso: En un SP de registro de pago, podría usar IF para verificar el monto (monto_total en Pago) y, si es inferior al precio de la Membresia, registrar el alumno en un estado "Pendiente" en la tabla Estado.
 2. Instrucciones Repetitivas o Bucles (LOOP, REPEAT, WHILE): Permiten iterar sobre bloques de código. Son esenciales cuando se trabaja con cursores, que son estructuras que permiten recorrer secuencialmente un conjunto de filas.
     ◦ Ejemplo de uso: Un SP podría usar un cursor para recorrer todos los alumnos con membresía vencida, y dentro de un bucle WHILE, actualizar el id_estado del alumno en la tabla Persona. Al trabajar con cursores, se debe manejar el error NOT FOUND (SQLSTATE ‘02000’) con un HANDLER para saber cuándo salir del bucle.
+
 **Potenciando el Script en la Seguridad**
 El uso de procedimientos almacenados es una de las maneras más efectivas de potenciar la seguridad de su script y su modelo de datos.
 **Seguridad Reforzada mediante SPs**
+
 **1. Control de Permisos Granular:** El Scrip puede permitir que varios usuarios o programas realicen operaciones sobre los objetos subyacentes (tablas como Persona, Pago, Personal) a través de un procedimiento, sin que esos usuarios o programas tengan permisos directos sobre los objetos. El procedimiento actúa como un guardián. Esto simplifica drásticamente los niveles de seguridad.
 2. Protección contra Inyección de Código SQL: Al utilizar parámetros en sus procedimientos (como IN, OUT, INOUT), la entrada se trata como un valor literal y no como código ejecutable. Esto hace mucho más difícil para un atacante insertar comandos maliciosos en las instrucciones Transact-SQL del procedimiento y poner en peligro la seguridad.
 3. Ocultación de la Arquitectura de la Base de Datos: Cuando una aplicación cliente llama a un SP a través de la red, solo la llamada al procedimiento es visible. Esto impide que usuarios malintencionados vean los nombres de los objetos, las tablas o las instrucciones Transact-SQL internas, dificultando la búsqueda de datos críticos.
 4. Contexto de Seguridad (SQL SECURITY): En MySQL, puede definir el contexto de seguridad con el que se ejecuta la rutina.
     ◦ DEFINER (Predeterminado): La rutina se ejecuta con los privilegios de la cuenta que la creó (el DEFINER). Esto permite que usuarios con pocos privilegios ejecuten operaciones complejas (como insertar en tablas sensibles), siempre y cuando el definidor tenga esos permisos.
     ◦ INVOKER: La rutina se ejecuta con los privilegios del usuario que la está invocando.
+
 **Conclusion:**
 En resumen, integrar procedimientos y funciones almacenadas en nuestro script no solo aumenta la eficiencia mediante el código reutilizable y la compilación, sino que crea una capa de seguridad esencial al aislar la lógica de negocio y proteger los objetos de la base de datos subyacentes contra accesos directos e inyecciones SQL.
 
 ## Resumen General del Tema:
 Al utilizar Procedimientos Almacenados Y Funciones dentro de la base de datos SQL, estos objetos permiten encapsular lógica de negocio (conjunto de reglas, políticas, y procesos que definen cómo opera y gestiona los datos una organizació), operaciones complejas y reaccionar automáticamente a eventos en las tablas, mejorando la eficiencia, seguridad y mantenibilidad.
 **GLOSARIO:**
+
 **(1)instrucciones Transact-SQL:**son comandos para gestionar y manipular datos en Microsoft SQL Server,por ejemplo: CREATE TABLE, INSERT, UPDATE, DELETE, SELECT, COMMIT, ROLLBACK, SAVE, etc. 
+
 **(2)método CLR:**es una función, procedimiento o desencadenador escrito en un lenguaje .NET (como C# o VB.NET) y ejecutado por el Common Language Runtime (CLR) de SQL Server.
+
 **(3)SPs o SFs:**bloques de código T-SQL precompilados y almacenados en la base de datos, diseñados para ejecutar tareas repetitivas
