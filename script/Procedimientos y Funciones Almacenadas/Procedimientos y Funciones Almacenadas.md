@@ -104,10 +104,11 @@ En resumen, integrar procedimientos y funciones almacenadas en nuestro script no
 
 ## Resumen General del Tema:
 Al utilizar Procedimientos Almacenados Y Funciones dentro de la base de datos SQL, estos objetos permiten encapsular lógica de negocio (conjunto de reglas, políticas, y procesos que definen cómo opera y gestiona los datos una organizació), operaciones complejas y reaccionar automáticamente a eventos en las tablas, mejorando la eficiencia, seguridad y mantenibilidad.
+
 **GLOSARIO:**
 
-**(1)instrucciones Transact-SQL:**son comandos para gestionar y manipular datos en Microsoft SQL Server,por ejemplo: CREATE TABLE, INSERT, UPDATE, DELETE, SELECT, COMMIT, ROLLBACK, SAVE, etc. 
+**(1)instrucciones Transact-SQL:** son comandos para gestionar y manipular datos en Microsoft SQL Server,por ejemplo: CREATE TABLE, INSERT, UPDATE, DELETE, SELECT, COMMIT, ROLLBACK, SAVE, etc. 
 
-**(2)método CLR:**es una función, procedimiento o desencadenador escrito en un lenguaje .NET (como C# o VB.NET) y ejecutado por el Common Language Runtime (CLR) de SQL Server.
+**(2)método CLR:** es una función, procedimiento o desencadenador escrito en un lenguaje .NET (como C# o VB.NET) y ejecutado por el Common Language Runtime (CLR) de SQL Server.
 
-**(3)SPs o SFs:**bloques de código T-SQL precompilados y almacenados en la base de datos, diseñados para ejecutar tareas repetitivas
+**(3)SPs o SFs:** bloques de código T-SQL precompilados y almacenados en la base de datos, diseñados para ejecutar tareas repetitivas
