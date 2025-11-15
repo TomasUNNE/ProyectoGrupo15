@@ -81,3 +81,41 @@ BEGIN CATCH
     SELECT COUNT(*) AS 'telefono_ana_gomez_existe' FROM telefono WHERE numero = '555-9876'; -- (Devolverá 0)
 END CATCH;
 GO
+
+--Transacción Anidada
+GO
+PRINT '--- DEMOSTRACIÓN DE TRANSACCION ANIDADA ---';
+PRINT '@@TRANCOUNT inicial: ' + STR(@@TRANCOUNT); -- Debe ser 0
+
+BEGIN TRAN transaccion_1; -- transaccion_1 (Externa)
+    PRINT 'BEGIN transaccion_1. @@TRANCOUNT: ' + STR(@@TRANCOUNT); -- Debe ser 1
+    INSERT INTO Pago (id_pago, fecha_pago, monto_total, id_metodo_pago) 
+    VALUES (10001, GETDATE(), 100.0, 1);
+
+    BEGIN TRAN transaccion_2; -- transaccion_2 (Anidada/Interna)
+        PRINT '  BEGIN transaccion_2. @@TRANCOUNT: ' + STR(@@TRANCOUNT); -- Debe ser 2
+        INSERT INTO Pago (id_pago, fecha_pago, monto_total, id_metodo_pago) 
+        VALUES (10002, GETDATE(), 200.0, 1);
+    
+        PRINT '  ROLLBACK GENERAL...';
+        ROLLBACK; 
+        PRINT '  ROLLBACK ejecutado. @@TRANCOUNT: ' + STR(@@TRANCOUNT); -- Debe ser 0
+
+-- Como el ROLLBACK ya bajó el contador a 0, este IF evitará errores
+IF @@TRANCOUNT > 0
+    COMMIT TRAN transaccion_1;
+ELSE
+    PRINT 'No se puede hacer COMMIT transaccion_1, la transacción ya fue revertida completamente.';
+GO
+
+-- Verificación: no deberían existir 
+SELECT * FROM Pago WHERE id_pago IN (10001, 10002);
+
+--Por si el @@TRANCOUNT quedo con transacciones pendientes
+ROLLBACK;
+PRINT @@TRANCOUNT;
+
+--Verificación para las pruebas
+SELECT id_pago FROM Pago 
+ORDER BY id_pago DESC
+
