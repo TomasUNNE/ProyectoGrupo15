@@ -28,7 +28,7 @@ Mientras que las diferencias conceptuales (procedimientos para acciones con efec
 ## Ventajas de Usar Los Procedimientos
 La utilizacion y buena aplicacion de los procedimientos en una base de datos SQL trae grandes ventajas como:
 
-**1  Seguridad Reforzada:**Los procedimientos almacenados actúan como guardianes de los datos subyacentes, lo cual simplifica y fortalece los niveles de seguridad.
+**1  Seguridad Reforzada:** Los procedimientos almacenados actúan como guardianes de los datos subyacentes, lo cual simplifica y fortalece los niveles de seguridad.
 
 **1.1**  <u>Protección de Objetos:</u> Varios usuarios y programas cliente pueden realizar operaciones en los objetos de la base de datos subyacentes a través de un procedimiento, aunque no tengan permisos directos sobre esos objetos. El procedimiento controla qué actividades se llevan a cabo y protege las tablas.
 
