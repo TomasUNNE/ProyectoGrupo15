@@ -27,13 +27,13 @@ Mientras que las diferencias conceptuales (procedimientos para acciones con efec
 
 ## Ventajas de Usar Los Procedimientos
 La utilizacion y buena aplicacion de los procedimientos en una base de datos SQL trae grandes ventajas como:
- **1** Seguridad Reforzada: Los procedimientos almacenados actúan como guardianes de los datos subyacentes, lo cual simplifica y fortalece los niveles de seguridad.
- **1.1** Protección de Objetos: Varios usuarios y programas cliente pueden realizar operaciones en los objetos de la base de datos subyacentes a través de un procedimiento, aunque no tengan permisos directos sobre esos objetos. El procedimiento controla qué actividades se llevan a cabo y protege las tablas.
- **1.2** Permisos Simplificados: Esto elimina la necesidad de conceder permisos en cada nivel de objetos. Por ejemplo, acciones como TRUNCATE TABLE no tienen permisos que se puedan conceder directamente al usuario, pero se pueden ampliar los permisos para truncar la tabla al usuario al que se conceda el permiso EXECUTE para el módulo que contiene la instrucción.
- **1.3** Prevención de Inyección SQL: El uso de parámetros en los procedimientos ayuda a protegerse contra ataques por inyección de código SQL. Dado que la entrada de parámetros se trata como un valor literal y no como código ejecutable, es más difícil para un atacante insertar comandos maliciosos en las instrucciones.
- **1.4** Ocultación de la Arquitectura: Cuando una aplicación llama a un procedimiento a través de la red, solo la llamada es visible. Esto evita que los usuarios malintencionados vean los nombres de los objetos, las tablas de la base de datos o busquen datos críticos.
- **1.5** Contexto de Seguridad: Se puede utilizar la cláusula EXECUTE AS (o SQL SECURITY en MySQL) para habilitar la suplantación de otro usuario o permitir que las aplicaciones realicen actividades sin necesidad de contar con permisos directos sobre los objetos subyacentes.
- **2** Tráfico de Red Reducido 
+**1**. Seguridad Reforzada: Los procedimientos almacenados actúan como guardianes de los datos subyacentes, lo cual simplifica y fortalece los niveles de seguridad.
+**1.1**. Protección de Objetos: Varios usuarios y programas cliente pueden realizar operaciones en los objetos de la base de datos subyacentes a través de un procedimiento, aunque no tengan permisos directos sobre esos objetos. El procedimiento controla qué actividades se llevan a cabo y protege las tablas.
+**1.2**. Permisos Simplificados: Esto elimina la necesidad de conceder permisos en cada nivel de objetos. Por ejemplo, acciones como TRUNCATE TABLE no tienen permisos que se puedan conceder directamente al usuario, pero se pueden ampliar los permisos para truncar la tabla al usuario al que se conceda el permiso EXECUTE para el módulo que contiene la instrucción.
+**1.3**. Prevención de Inyección SQL: El uso de parámetros en los procedimientos ayuda a protegerse contra ataques por inyección de código SQL. Dado que la entrada de parámetros se trata como un valor literal y no como código ejecutable, es más difícil para un atacante insertar comandos maliciosos en las instrucciones.
+**1.4**. Ocultación de la Arquitectura: Cuando una aplicación llama a un procedimiento a través de la red, solo la llamada es visible. Esto evita que los usuarios malintencionados vean los nombres de los objetos, las tablas de la base de datos o busquen datos críticos.
+**1.5**. Contexto de Seguridad: Se puede utilizar la cláusula EXECUTE AS (o SQL SECURITY en MySQL) para habilitar la suplantación de otro usuario o permitir que las aplicaciones realicen actividades sin necesidad de contar con permisos directos sobre los objetos subyacentes.
+**2** Tráfico de Red Reducido 
 El código de un procedimiento se ejecuta en un único lote de código.
 **2.1** Esto reduce significativamente el tráfico de red entre el servidor y el cliente.
 **2.2** Únicamente se envía a través de la red la llamada para ejecutar el procedimiento, mientras que sin esta encapsulación, cada línea de código tendría que enviarse por separado.
