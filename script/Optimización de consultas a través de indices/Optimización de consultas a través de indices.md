@@ -36,7 +36,7 @@ Con Índice: Se creó un índice NONCLUSTERED en correo en la tabla Persona_Con_
 
 Métricas: Se midieron las Lecturas Lógicas (STATISTICS IO) y el Tiempo de CPU (STATISTICS TIME).
 
-### 2.2. Resultados del escenario sin índica
+### 2.2. Resultados del escenario sin índice
 Al buscar en Persona_Sin_Indice (que solamente tiene el índice Clustered en id_persona), el optimizador no encontró ningún "mapa" para la columna correo.
 
 Consulta: SELECT ... WHERE correo = 'persona5820190@gimnasio.com'
