@@ -27,54 +27,43 @@ Mientras que las diferencias conceptuales (procedimientos para acciones con efec
 
 ## Ventajas de Usar Los Procedimientos
 La utilizacion y buena aplicacion de los procedimientos en una base de datos SQL trae grandes ventajas como:
-**1**  Seguridad Reforzada: Los procedimientos almacenados actúan como guardianes de los datos subyacentes, lo cual simplifica y fortalece los niveles de seguridad.
 
+**1**  Seguridad Reforzada: Los procedimientos almacenados actúan como guardianes de los datos subyacentes, lo cual simplifica y fortalece los niveles de seguridad.
 
 **1.1**  Protección de Objetos: Varios usuarios y programas cliente pueden realizar operaciones en los objetos de la base de datos subyacentes a través de un procedimiento, aunque no tengan permisos directos sobre esos objetos. El procedimiento controla qué actividades se llevan a cabo y protege las tablas.
 
-
 **1.2**  Permisos Simplificados: Esto elimina la necesidad de conceder permisos en cada nivel de objetos. Por ejemplo, acciones como TRUNCATE TABLE no tienen permisos que se puedan conceder directamente al usuario, pero se pueden ampliar los permisos para truncar la tabla al usuario al que se conceda el permiso EXECUTE para el módulo que contiene la instrucción.
-
 
 **1.3**. Prevención de Inyección SQL: El uso de parámetros en los procedimientos ayuda a protegerse contra ataques por inyección de código SQL. Dado que la entrada de parámetros se trata como un valor literal y no como código ejecutable, es más difícil para un atacante insertar comandos maliciosos en las instrucciones.
 
-
 **1.4**. Ocultación de la Arquitectura: Cuando una aplicación llama a un procedimiento a través de la red, solo la llamada es visible. Esto evita que los usuarios malintencionados vean los nombres de los objetos, las tablas de la base de datos o busquen datos críticos.
 
-
 **1.5**. Contexto de Seguridad: Se puede utilizar la cláusula EXECUTE AS (o SQL SECURITY en MySQL) para habilitar la suplantación de otro usuario o permitir que las aplicaciones realicen actividades sin necesidad de contar con permisos directos sobre los objetos subyacentes.
-
 
 **2** Tráfico de Red Reducido 
 El código de un procedimiento se ejecuta en un único lote de código.
 
-
 **2.1** Esto reduce significativamente el tráfico de red entre el servidor y el cliente.
 
-
 **2.2** Únicamente se envía a través de la red la llamada para ejecutar el procedimiento, mientras que sin esta encapsulación, cada línea de código tendría que enviarse por separado.
-
 
 **3** Rendimiento Mejorado 
 De forma predeterminada, un procedimiento se compila la primera vez que se ejecuta, y el plan de ejecución creado se reutiliza en posteriores ejecuciones.
 
-
 **3.1** Debido a que el procesador de consultas no tiene que crear un plan nuevo cada vez, normalmente necesita menos tiempo para procesar el procedimiento.
-
 
 **4**Reutilización del Código (Reutilización del código) 
 Cualquier operación de base de datos redundante es un candidato perfecto para la encapsulación en un procedimiento.
 
-
 **4.1** Esto elimina la necesidad de escribir el mismo código varias veces, reduciendo las inconsistencias de código.
-
 
 **4.2** Permite que cualquier usuario o aplicación con los permisos necesarios pueda acceder y ejecutar el código centralizado.
 
-
 **5** Mantenimiento Más Sencillo (Easier Maintenance) 
 Al llamar las aplicaciones cliente a procedimientos y mantener las operaciones de base de datos en la capa de datos, solo se deben actualizar los cambios de los procesos en la base de datos subyacente.
+
 **5.1** El nivel de aplicación permanece independiente y no necesita tener conocimiento sobre los cambios realizados en los diseños, las relaciones o los procesos internos de la base de datos.
+
 ## Aplicacion de los temas en nuestro modelos de datos
 Para el esquema del Caso_gimnasio, la implementación de rutinas almacenadas puede potenciar el modelo mejorando la integridad de los datos y la eficiencia operativa.
 Casos de uso de Procedimientos Almacenados (SPs)
