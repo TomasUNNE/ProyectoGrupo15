@@ -1,7 +1,7 @@
--- Actualiza el pago de un alumno para renovar su membresía
+-- Actualiza el pago de un alumno para renovar su membresía mediante un Proceso Almacenado
 USE Caso_gimnasio; 
 
-CREATE PROCEDURE sp_RenovarMembresia
+CREATE PROCEDURE Pa_RenovarMembresia
     @id_alumno INT,
     @id_metodo_pago INT
 AS
@@ -28,7 +28,7 @@ BEGIN
 END;
 
 -- Ejecutar renovación
-EXEC sp_RenovarMembresia @id_alumno = 1, @id_metodo_pago = 1;
+EXEC Pa_RenovarMembresia @id_alumno = 1, @id_metodo_pago = 1;
 
 -- Verificar renovación
 SELECT a.id_alumno, p.nombre, m.nombre as membresia, pg.monto_total, pg.fecha_pago
@@ -39,4 +39,4 @@ JOIN Pago pg ON a.id_pago = pg.id_pago
 WHERE a.id_alumno = 1;
 
 -- Eliminar el procedimiento si ya no es necesario
-DROP PROCEDURE sp_RenovarMembresia;
+DROP PROCEDURE Pa_RenovarMembresia;
