@@ -16,12 +16,12 @@ BEGIN TRY;
     SCOPE_IDENTITY(): devuelve el último valor de identidad insertado en una columna 
     de identidad en el mismo ámbito.*/ 
 
-    -- 2. Insertar Persona (Asumimos id_estado = 1 existe)
+    -- 2. Insertar Persona
     INSERT INTO Persona (nombre, apellido, correo, dni, id_telefono, id_estado)
     VALUES ('Juan', 'Perez', 'juan.perez@email.com', 12345678, @NuevoTelefonoID, 1);
     DECLARE @NuevoPersonaID INT = SCOPE_IDENTITY();
 
-    -- 3. Insertar Pago (id_pago es manual en tu esquema)
+    -- 3. Insertar Pago
     DECLARE @NuevoPagoID INT = 10000;
     INSERT INTO Pago (id_pago, fecha_pago, monto_total, id_metodo_pago)
     VALUES (@NuevoPagoID, GETDATE(), 5000.0, 1);
